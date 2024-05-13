@@ -17,15 +17,15 @@ public class Collector : MonoBehaviour
     }
     private void OnCollisionStay(Collision other)
     {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            gameOverSeconds -= Time.deltaTime;
-            if (gameOverSeconds < 0)
-            {
-                Destroy(other.gameObject);
-                GameController.Instance.GameOver();
-            }
-        }
+        // if (other.gameObject.CompareTag("Player"))
+        // {
+        //     gameOverSeconds -= Time.deltaTime;
+        //     if (gameOverSeconds < 0)
+        //     {
+        //         Destroy(other.gameObject);
+        //         GameController.Instance.GameOver();
+        //     }
+        // }
     }
     private void OnCollisionEnter(Collision other)
     {

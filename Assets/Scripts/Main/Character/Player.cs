@@ -13,7 +13,7 @@ public class Player : MB
     [SerializeField] ParticleSystem bigger, longer;
     Camera cam;
     Vector3 targetScale = Vector3.one;
-    SpringJoint joint;
+    [SerializeField] SpringJoint joint;
     bool isHanging = false;
     LayerMask HanaLayer;
 
@@ -24,6 +24,7 @@ public class Player : MB
         cam = FindObjectOfType<Camera>();
         GameController.Instance.OnGamePlay += OnGamePlay;
         HanaLayer = LayerMask.GetMask("Hana");
+        joint = GetComponent<SpringJoint>();
     }
 
     private void OnGamePlay(object sender, EventArgs e)
@@ -53,24 +54,21 @@ public class Player : MB
         {
             if (IsDown)
             {
-                // projectile.gameObject.SetActive(true);
-                if (Physics.Raycast(transform.position, new Vector3(0, 0.5f, 0.4f), out RaycastHit hit, 20, HanaLayer))
-                {
-                    Debug.DrawRay(transform.position, new Vector3(0, 0.5f, 0.4f) * 5, Color.red, 2);
-                    OlsEhlel.transform.position = hit.point;
-                    joint = gameObject.AddComponent<SpringJoint>();
-                    joint.connectedBody = OlsEhlel;
-                    joint.autoConfigureConnectedAnchor = false;
-                    // joint.xMotion = ConfigurableJointMotion.Locked;
-                    // joint.yMotion = ConfigurableJointMotion.Locked;
-                    // joint.zMotion = ConfigurableJointMotion.Locked;
-                    // float distance = Vector3.Distance(transform.position, OlsEhlel.position);
-                    // joint.anchor = new Vector3(0, 5, 0);
-                    // joint.connectedAnchor = new Vector3(0, 2, 0);
-                    joint.spring = 100;
-                    joint.damper = 50f;
-                    isHanging = true;
-                }
+                // if (Physics.Raycast(transform.position, new Vector3(0, 0.5f, 0.4f), out RaycastHit hit, 20, HanaLayer))
+                // {
+
+                // }
+                Debug.DrawRay(transform.position, new Vector3(0, 0.5f, 0.4f) * 5, Color.red, 2);
+                // OlsEhlel.transform.position = hit.point;
+                Vector3 OlsPostoin = transform.position + new Vector3(0, 0.6f, 1).normalized * 10;
+                OlsEhlel.transform.position = OlsPostoin;
+                // joint = gameObject.AddComponent<SpringJoint>();
+                joint.connectedBody = OlsEhlel;
+                joint.autoConfigureConnectedAnchor = false;
+                joint.spring = 400f;
+                joint.damper = 200f;
+                isHanging = true;
+
             }
             else
             if (IsClick)
@@ -79,20 +77,13 @@ public class Player : MB
                 {
                     rb.AddForce(new Vector3(0, 0, 1).normalized * 5, ForceMode.Acceleration);
                 }
-                // Vector3 mousePos = Input.mousePosition;
-                // mousePos.z = 5;
-                // Vector3 worldPosition = cam.ScreenToWorldPoint(mousePos);
-                // // Debug.DrawLine(cam.transform.position, worldPosition, Color.red, 1);
-                // // Vector3 dir = transform.position - Bombog.transform.position;
-                // Vector3 dirRaw = worldPosition - Bombog.transform.position;
-                // rb.velocity = dirRaw;
+
             }
             else if (IsUp)
             {
-                Destroy(joint);
-                // joint.xMotion = ConfigurableJointMotion.Free;
-                // joint.yMotion = ConfigurableJointMotion.Free;
-                // joint.zMotion = ConfigurableJointMotion.Free;
+                joint.connectedBody = null;
+                joint.spring = 0;
+                joint.damper = 0;
                 isHanging = false;
                 rb.AddForce(new Vector3(0, 0.5f, 0.5f) * 100, ForceMode.Force);
             }

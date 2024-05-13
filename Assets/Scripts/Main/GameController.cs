@@ -151,20 +151,20 @@ public class GameController : Singleton<GameController>
             A.SetGameViewScale();
 
             // Build folder үүсгэх
-            IO.CheckCrtDir("Build");
+            // IO.CheckCrtDir("Build");
 
-            // .gitignore үүсгэх
-            if (!IO.IsFileExists(".gitignore"))
-                IO.CrtFile(".gitignore", IO.ReadFile(IO.GetDataPath() + "gitignore"));
+            // // .gitignore үүсгэх
+            // if (!IO.IsFileExists(".gitignore"))
+            //     IO.CrtFile(".gitignore", IO.ReadFile(IO.GetDataPath() + "gitignore"));
 
-            // ProjectSettings / Editor / Version Control / Mode-г Visible Meta Files болгох
-            if (!IO.ReadFile(IO.GetPsPath() + "EditorSettings.asset").Contains("Visible Meta Files"))
-                IO.SetMetaLine("ProjectSettings/EditorSettings.asset", "m_ExternalVersionControlSupport", "m_ExternalVersionControlSupport: Visible Meta Files");
+            // // ProjectSettings / Editor / Version Control / Mode-г Visible Meta Files болгох
+            // if (!IO.ReadFile(IO.GetPsPath() + "EditorSettings.asset").Contains("Visible Meta Files"))
+            //     IO.SetMetaLine("ProjectSettings/EditorSettings.asset", "m_ExternalVersionControlSupport", "m_ExternalVersionControlSupport: Visible Meta Files");
 
-            IO.ExtensionGameObjectRb();
-            // IO.ExtensionGameObjectTf();
-            IO.ExtensionGameObject();
-            IO.ExtensionEnum();
+            // IO.ExtensionGameObjectRb();
+            // // IO.ExtensionGameObjectTf();
+            // IO.ExtensionGameObject();
+            // IO.ExtensionEnum();
 
             // IO.EditorMenuItem();
             // IO.Vector();

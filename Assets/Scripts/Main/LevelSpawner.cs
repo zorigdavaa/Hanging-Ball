@@ -27,9 +27,9 @@ public class LevelSpawner : Singleton<LevelSpawner>
         {
             Vector3 lastPos = cubePos.LastOrDefault();
             GameObject dood = Instantiate(cube, lastPos, Quaternion.identity, transform);
-            GameObject deed = Instantiate(cube, lastPos + new Vector3(0, 20, 0), Quaternion.identity, transform);
+            // GameObject deed = Instantiate(cube, lastPos + new Vector3(0, 20, 0), Quaternion.identity, transform);
             dood.transform.GetChild(0).GetComponent<Renderer>().material = materials[i % materials.Count];
-            deed.transform.GetChild(0).GetComponent<Renderer>().material = materials[i % materials.Count];
+            // deed.transform.GetChild(0).GetComponent<Renderer>().material = materials[i % materials.Count];
             cubePos.Add(lastPos + new Vector3(0, Random.Range(-2, 2), 3));
             dood.gameObject.layer = 0;
         }

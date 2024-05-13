@@ -44,7 +44,7 @@ public class ChimneyCreator : MB
                     point = transform.TransformPoint(point);
                     Brick insBrick = Instantiate(brick, point, Quaternion.LookRotation(dir.normalized), transform);
                     bricks.Add(insBrick);
-                    insBrick.creator = this;
+                    // insBrick.creator = this;
                     // insBrick.transform.GetChild(0).GetComponent<Renderer>().material = mat;
                     // if (i == 0)
                     // {

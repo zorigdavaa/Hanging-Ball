@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Brick : MonoBehaviour
 {
-    public ChimneyCreator creator;
+    // public ChimneyCreator creator;
     [SerializeField] ParticleSystem particle;
     Rigidbody rb;
     LayerMask brickLayer;
@@ -67,7 +67,7 @@ public class Brick : MonoBehaviour
         {
             rb.isKinematic = false;
             rb.useGravity = true;
-            creator?.RemoveBrickFromList(this);
+            // creator?.RemoveBrickFromList(this);
             if (particle != null)
             {
                 particle.Play();

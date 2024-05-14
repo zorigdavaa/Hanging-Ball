@@ -6,7 +6,6 @@ public class VoxelDataLoader : MonoBehaviour
 {
     public TextAsset jsonFile; // Assign the TextAsset containing your JSON data in the Unity Inspector
     [SerializeField] VoxelData voxelData;
-    [SerializeField] Material Material;
 
     [ContextMenu("Populate Data")]
     private void PopulateData()
@@ -49,7 +48,7 @@ public class VoxelDataLoader : MonoBehaviour
                 GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 obj.transform.position = voxel.position;
                 // obj.GetComponent<Renderer>().material.color = voxel.color;
-                Material.color = voxel.color;
+                // Material.color = voxel.color;
                 Material mat = new Material(obj.GetComponent<Renderer>().sharedMaterial);
                 mat.color = voxel.color;
                 obj.GetComponent<Renderer>().sharedMaterial = mat;

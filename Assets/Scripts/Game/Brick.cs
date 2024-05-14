@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ZPackage;
 
 public class Brick : MonoBehaviour
 {
@@ -9,10 +10,12 @@ public class Brick : MonoBehaviour
     Rigidbody rb;
     LayerMask brickLayer;
     bool isFree = false;
+    Camera cam;
     // public bool debug = false;
-    public bool bottomCheck => A.Player.transform.position.y < transform.position.y;
+    public bool bottomCheck => Z.Player.transform.position.y < transform.position.y;
     private void Start()
     {
+        cam = Camera.main;
         rb = GetComponent<Rigidbody>();
         brickLayer = LayerMask.GetMask("Brick");
     }
@@ -86,18 +89,18 @@ public class Brick : MonoBehaviour
             float time = 0;
             float duration = 1;
             float t = 1;
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(Random.Range(3f, 5f));
             while (time < duration)
             {
                 time += Time.deltaTime;
                 t = time / duration;
-                Vector3 toPoint = CameraController.Instance.GetCamera().ScreenToWorldPoint(CanvasController.Instance.hudCoin.transform.position + new Vector3(0, 0, 10));
+                Vector3 toPoint = cam.ScreenToWorldPoint(Z.CanM.Coin.transform.position + new Vector3(0, 0, 10));
                 transform.position = Vector3.Lerp(transform.position, toPoint, t);
                 // money.transform.localScale = Vector3.Lerp(money.transform.localScale, Vector3.one * 0.4f, t);
                 // Mathf.Lerp(0, 1, t);
                 yield return null;
             }
-            GameController.Instance.Coin++;
+            Z.GM.Coin++;
             Destroy(gameObject);
         }
     }

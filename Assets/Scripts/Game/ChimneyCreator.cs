@@ -3,8 +3,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ZPackage;
 
-public class ChimneyCreator : MB
+public class ChimneyCreator : Mb
 {
     float TAU = 6.283185307179586f;
     public int floorCount = 3;
@@ -63,7 +64,7 @@ public class ChimneyCreator : MB
         bricks.Remove(brick);
         if (bricks.Count == 0)
         {
-            GameController.Instance.LevelCompleted();
+            GameManager.Instance.LevelComplete(this, 0);
         }
     }
     public Vector3 GetTopOnesPos()

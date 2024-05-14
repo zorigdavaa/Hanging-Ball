@@ -27,7 +27,7 @@ public class Demolisher : BaseShooter
     void Start()
     {
         cam = FindObjectOfType<Camera>();
-        GameController.Instance.OnGamePlay += OnGamePlay;
+        // GameController.Instance.OnGamePlay += OnGamePlay;
     }
 
     private void OnGamePlay(object sender, EventArgs e)

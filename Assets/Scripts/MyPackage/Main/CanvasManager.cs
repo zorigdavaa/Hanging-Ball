@@ -7,8 +7,8 @@ using UnityEngine;
 
 public class CanvasManager : GenericSingleton<CanvasManager>
 {
-    public GameObject beforeStartMenu, afterLostMenu, afterWinMenu, Coin, Level, Hud, BoardMenu;
-    [SerializeField] TMP_Text CoinText, ScoreText, ScoreMultipText, LevelText, ThrowCount;
+    public GameObject beforeStartMenu, afterLostMenu, afterWinMenu, Coin, Level, Hud, Brick;
+    [SerializeField] TMP_Text CoinText, ScoreText, ScoreMultipText, LevelText, BrickText;
     private void OnEnable()
     {
         CoinText = Coin.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
@@ -41,10 +41,6 @@ public class CanvasManager : GenericSingleton<CanvasManager>
     {
         ScoreText.text = value;
     }
-    public void HudThrowCount(string value)
-    {
-        ThrowCount.text = value;
-    }
     public void HudScoreMult(int value)
     {
         ScoreMultipText.text = value.ToString() + "X";
@@ -52,6 +48,10 @@ public class CanvasManager : GenericSingleton<CanvasManager>
     public void HudLevel(string value)
     {
         LevelText.text = value;
+    }
+    public void HudBrick(string v)
+    {
+        BrickText.text = v;
     }
 
     private void OnGameOver(object sender, EventArgs e)
@@ -92,4 +92,6 @@ public class CanvasManager : GenericSingleton<CanvasManager>
             nextButton.gameObject.SetActive(true);
         }
     }
+
+
 }

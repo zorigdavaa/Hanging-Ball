@@ -10,7 +10,7 @@ namespace ZPackage
     public class LevelSpawner : GenericSingleton<LevelSpawner>
     {
         [SerializeField] GameObject cube;
-        [SerializeField] GameObject Boxes;
+        [SerializeField] List<GameObject> Boxes;
         [SerializeField] List<Material> materials;
         public List<Level> levels;
         List<Vector3> cubePos = new List<Vector3>();
@@ -74,7 +74,7 @@ namespace ZPackage
             for (int i = 0; i < v; i++)
             {
                 Vector3 pos = GetPointByZ(lastBoxPos);
-                Instantiate(Boxes, pos + new Vector3(0, 5, 0), Quaternion.identity, transform);
+                Instantiate(Boxes[Random.Range(0, Boxes.Count)], pos + new Vector3(0, Random.Range(5, 20), 0), Quaternion.identity, transform);
                 lastBoxPos += 30;
             }
         }

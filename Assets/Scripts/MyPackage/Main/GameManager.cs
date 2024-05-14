@@ -12,7 +12,7 @@ using SupersonicWisdomSDK;
 
 namespace ZPackage
 {
-    public enum GameState { Starting, Playing, Pause, LevelCompleted, GameOver, Settings, Flying }
+    public enum GameState { Starting, Playing, Pause, LevelCompleted, GameOver, Settings, Wait }
     public class GameManager : GenericSingleton<GameManager>
     {
         // [SerializeField] GroundSpawner groundSpawner;
@@ -26,7 +26,7 @@ namespace ZPackage
         public event EventHandler<LevelCompletedEventArgs> LevelCompleted;
         public event EventHandler GameOverEvent;
         public event EventHandler Settings;
-        public event EventHandler Flying;
+        public event EventHandler Waiting;
         #endregion
         #region Properties
         private GameState _state;
@@ -105,18 +105,6 @@ namespace ZPackage
             }
         }
 
-        private int throwCount;
-        public int ThrowCount
-        {
-            get { return throwCount; }
-            set
-            {
-
-                throwCount = value;
-                // PlayerPrefs.SetInt("throwCount", value);
-                Z.CanM.HudThrowCount(value.ToString());
-            }
-        }
         private int nextLvlScore;
         public int NextLvlScore
         {
@@ -126,6 +114,17 @@ namespace ZPackage
                 nextLvlScore = value;
             }
         }
+        private int brickCount;
+        public int BrickCount
+        {
+            get { return brickCount; }
+            set
+            {
+                brickCount = value;
+                Z.CanM.HudBrick(value.ToString());
+            }
+        }
+
 
         #endregion
 
@@ -152,7 +151,6 @@ namespace ZPackage
             Coin = PlayerPrefs.GetInt("coin", 0);
             Level = PlayerPrefs.GetInt("level", 1);
             // Score = 0;
-            ThrowCount = 3;
             NextLvlScore = PlayerPrefs.GetInt("nextLevelScore", 20);
             // Score = PlayerPrefs.GetInt("score",0);
         }
@@ -184,10 +182,10 @@ namespace ZPackage
             State = GameState.Starting;
             GameStart?.Invoke(this, EventArgs.Empty);
         }
-        public void Fly()
+        public void Wait()
         {
-            State = GameState.Flying;
-            Flying?.Invoke(this, EventArgs.Empty);
+            State = GameState.Wait;
+            Waiting?.Invoke(this, EventArgs.Empty);
         }
         public async void PlayGame()
         {

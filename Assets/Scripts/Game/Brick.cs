@@ -7,6 +7,7 @@ public class Brick : MonoBehaviour
 {
     // public ChimneyCreator creator;
     [SerializeField] ParticleSystem particle;
+    [SerializeField] Collider coll;
     Rigidbody rb;
     LayerMask brickLayer;
     bool isFree = false;
@@ -88,19 +89,22 @@ public class Brick : MonoBehaviour
         {
             float time = 0;
             float duration = 1;
-            float t = 1;
-            yield return new WaitForSeconds(Random.Range(3f, 5f));
+            float t;
+            // yield return new WaitForSeconds(Random.Range(3f, 5f));
+            yield return new WaitUntil(() => transform.position.z < Z.Player.transform.position.z - 10);
+            rb.isKinematic = true;
+            coll.enabled = false;
             while (time < duration)
             {
                 time += Time.deltaTime;
                 t = time / duration;
-                Vector3 toPoint = cam.ScreenToWorldPoint(Z.CanM.Coin.transform.position + new Vector3(0, 0, 10));
+                Vector3 toPoint = cam.ScreenToWorldPoint(Z.CanM.Brick.transform.position + new Vector3(0, 0, 8f));
                 transform.position = Vector3.Lerp(transform.position, toPoint, t);
-                // money.transform.localScale = Vector3.Lerp(money.transform.localScale, Vector3.one * 0.4f, t);
+                transform.localScale = Vector3.Lerp(transform.localScale, Vector3.one * 0.6f, t);
                 // Mathf.Lerp(0, 1, t);
                 yield return null;
             }
-            Z.GM.Coin++;
+            Z.GM.BrickCount++;
             Destroy(gameObject);
         }
     }

@@ -59,20 +59,7 @@ public class Player : Mb
         {
             if (IsDown)
             {
-                // if (Physics.Raycast(transform.position, new Vector3(0, 0.5f, 0.4f), out RaycastHit hit, 20, HanaLayer))
-                // {
-
-                // }
-                // Debug.DrawRay(transform.position, new Vector3(0, 0.5f, 0.4f) * 5, Color.red, 2);
-                // OlsEhlel.transform.position = hit.point;
-                Vector3 OlsPostoin = transform.position + new Vector3(0, 0.6f, 1).normalized * 10;
-                OlsEhlel.transform.position = OlsPostoin;
-                // joint = gameObject.AddComponent<SpringJoint>();
-                joint.connectedBody = OlsEhlel;
-                joint.autoConfigureConnectedAnchor = false;
-                joint.spring = 400f;
-                joint.damper = 200f;
-                isHanging = true;
+                HangBall();
 
             }
             else
@@ -86,21 +73,52 @@ public class Player : Mb
             }
             else if (IsUp)
             {
-                joint.connectedBody = null;
-                joint.spring = 0;
-                joint.damper = 0;
-                isHanging = false;
-                rb.AddForce(new Vector3(0, 0.5f, 0.5f) * 100, ForceMode.Force);
+                ReleaseBall();
             }
             Bombog.transform.localScale = Vector3.Lerp(Bombog.transform.localScale, targetScale, 0.3f);
         }
     }
+
+    private void HangBall()
+    {
+        // if (Physics.Raycast(transform.position, new Vector3(0, 0.5f, 0.4f), out RaycastHit hit, 20, HanaLayer))
+        // {
+
+        // }
+        // Debug.DrawRay(transform.position, new Vector3(0, 0.5f, 0.4f) * 5, Color.red, 2);
+        // OlsEhlel.transform.position = hit.point;
+        Vector3 OlsPostoin = transform.position + new Vector3(0, 0.6f, 1).normalized * 10;
+        OlsEhlel.transform.position = OlsPostoin;
+        // joint = gameObject.AddComponent<SpringJoint>();
+        joint.connectedBody = OlsEhlel;
+        joint.autoConfigureConnectedAnchor = false;
+        joint.spring = 400f;
+        joint.damper = 200f;
+        isHanging = true;
+    }
+
+    private void ReleaseBall()
+    {
+        joint.connectedBody = null;
+        joint.spring = 0;
+        joint.damper = 0;
+        isHanging = false;
+        rb.AddForce(new Vector3(0, 0.5f, 0.5f) * 100, ForceMode.Force);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Finish"))
         {
-            // GameController.
+            Z.GM.Wait();
+            ReleaseBall();
+            StartCoroutine(localCoroutine());
         }
+    }
+    IEnumerator localCoroutine()
+    {
+        yield return new WaitUntil(() => rb.velocity.magnitude < 2);
+        Z.GM.LevelComplete(this, 0);
     }
 
     internal void Longer()

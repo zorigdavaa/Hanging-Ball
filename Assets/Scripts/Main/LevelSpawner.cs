@@ -9,6 +9,7 @@ public class LevelSpawner : Singleton<LevelSpawner>
     [SerializeField] List<Material> materials;
     public List<Level> levels;
     List<Vector3> cubePos = new List<Vector3>();
+    [SerializeField] GameObject Finish;
     // Vector3 lastCubePos;
     public void Init()
     {
@@ -19,12 +20,13 @@ public class LevelSpawner : Singleton<LevelSpawner>
     {
         InstantiateRoad(200);
         InstantiateBoxes(20);
-        InstantiateBoss();
+        InstantiateFinish();
     }
 
-    private void InstantiateBoss()
+    private void InstantiateFinish()
     {
-        throw new System.NotImplementedException();
+        Vector3 lastPos = cubePos.LastOrDefault();
+        Instantiate(Finish, lastPos, Quaternion.identity, transform);
     }
 
     private void InstantiateRoad(int v)

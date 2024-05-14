@@ -2957,37 +2957,6 @@ MonoBehaviour:
     iterations: 1
     SORFactor: 1
     enabled: 0
---- !u!1 &725978194
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 725978195}
-  m_Layer: 0
-  m_Name: Finish
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &725978195
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 725978194}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &729953576
 GameObject:
   m_ObjectHideFlags: 0
@@ -5879,6 +5848,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 8ad719f83e4b141dd9a88f617831333f, type: 2}
   - {fileID: 2100000, guid: 3c696f428ea368145bf3fb88d01c38a1, type: 2}
   levels: []
+  Finish: {fileID: 341224405195693723, guid: a45154d2bc4b10744bbb37f02c7dc3df, type: 3}
 --- !u!4 &1833092778
 Transform:
   m_ObjectHideFlags: 0
@@ -7845,4 +7815,3 @@ SceneRoots:
   - {fileID: 1250234917}
   - {fileID: 1716977026}
   - {fileID: 710322754}
-  - {fileID: 725978195}

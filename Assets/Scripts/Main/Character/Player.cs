@@ -90,6 +90,13 @@ public class Player : MB
             Bombog.transform.localScale = Vector3.Lerp(Bombog.transform.localScale, targetScale, 0.3f);
         }
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Finish"))
+        {
+            // GameController.
+        }
+    }
 
     internal void Longer()
     {

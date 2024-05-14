@@ -18,7 +18,7 @@ public class Brick : MonoBehaviour
     }
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.CompareTag("Sum") && GetComponent<Rigidbody>().isKinematic)
+        if (other.gameObject.CompareTag("Player") && GetComponent<Rigidbody>().isKinematic)
         {
             SetFRee();
         }
@@ -67,12 +67,38 @@ public class Brick : MonoBehaviour
         {
             rb.isKinematic = false;
             rb.useGravity = true;
+            rb.drag = 0;
+            rb.angularDrag = 0.05f;
             // creator?.RemoveBrickFromList(this);
             if (particle != null)
             {
                 particle.Play();
             }
             isFree = true;
+            InsMoneyAndGotoTop();
+        }
+    }
+    private void InsMoneyAndGotoTop()
+    {
+        StartCoroutine(localCoroutine());
+        IEnumerator localCoroutine()
+        {
+            float time = 0;
+            float duration = 1;
+            float t = 1;
+            yield return new WaitForSeconds(3);
+            while (time < duration)
+            {
+                time += Time.deltaTime;
+                t = time / duration;
+                Vector3 toPoint = CameraController.Instance.GetCamera().ScreenToWorldPoint(CanvasController.Instance.hudCoin.transform.position + new Vector3(0, 0, 10));
+                transform.position = Vector3.Lerp(transform.position, toPoint, t);
+                // money.transform.localScale = Vector3.Lerp(money.transform.localScale, Vector3.one * 0.4f, t);
+                // Mathf.Lerp(0, 1, t);
+                yield return null;
+            }
+            GameController.Instance.Coin++;
+            Destroy(gameObject);
         }
     }
 }

@@ -58,7 +58,7 @@ public class Player : MB
                 // {
 
                 // }
-                Debug.DrawRay(transform.position, new Vector3(0, 0.5f, 0.4f) * 5, Color.red, 2);
+                // Debug.DrawRay(transform.position, new Vector3(0, 0.5f, 0.4f) * 5, Color.red, 2);
                 // OlsEhlel.transform.position = hit.point;
                 Vector3 OlsPostoin = transform.position + new Vector3(0, 0.6f, 1).normalized * 10;
                 OlsEhlel.transform.position = OlsPostoin;

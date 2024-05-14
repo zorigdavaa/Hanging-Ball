@@ -17,8 +17,14 @@ public class LevelSpawner : Singleton<LevelSpawner>
     }
     public void LoadLevel()
     {
-        InstantiateRoad(500);
-        InstantiateBoxes(50);
+        InstantiateRoad(200);
+        InstantiateBoxes(20);
+        InstantiateBoss();
+    }
+
+    private void InstantiateBoss()
+    {
+        throw new System.NotImplementedException();
     }
 
     private void InstantiateRoad(int v)
@@ -27,7 +33,7 @@ public class LevelSpawner : Singleton<LevelSpawner>
         {
             Vector3 lastPos = cubePos.LastOrDefault();
             GameObject dood = Instantiate(cube, lastPos, Quaternion.identity, transform);
-            // GameObject deed = Instantiate(cube, lastPos + new Vector3(0, 20, 0), Quaternion.identity, transform);
+            GameObject deed = Instantiate(cube, lastPos + new Vector3(0, 60, 0), Quaternion.identity, transform);
             dood.transform.GetChild(0).GetComponent<Renderer>().material = materials[i % materials.Count];
             // deed.transform.GetChild(0).GetComponent<Renderer>().material = materials[i % materials.Count];
             cubePos.Add(lastPos + new Vector3(0, Random.Range(-2, 2), 3));
@@ -52,7 +58,7 @@ public class LevelSpawner : Singleton<LevelSpawner>
         {
             Vector3 pos = GetPointByZ(lastBoxPos);
             Instantiate(Boxes, pos + new Vector3(0, 5, 0), Quaternion.identity, transform);
-            lastBoxPos += 20;
+            lastBoxPos += 30;
         }
     }
     int GetLevelIdx()

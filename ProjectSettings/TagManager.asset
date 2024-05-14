@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Sum
   - FxTemporaire
+  - BossPart
   layers:
   - Default
   - TransparentFX

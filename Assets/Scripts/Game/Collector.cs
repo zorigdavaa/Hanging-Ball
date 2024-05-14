@@ -8,12 +8,12 @@ public class Collector : MonoBehaviour
     float gameOverSeconds = 1;
     private void OnTriggerEnter(Collider other)
     {
-        Brick brick = other.GetComponent<Brick>();
-        if (brick)
-        {
-            InsMoneyAndGotoTop(other.transform.position);
-            Destroy(brick.gameObject);
-        }
+        // Brick brick = other.GetComponent<Brick>();
+        // if (brick)
+        // {
+        //     InsMoneyAndGotoTop(other.transform.position);
+        //     Destroy(brick.gameObject);
+        // }
     }
     private void OnCollisionStay(Collision other)
     {
@@ -29,12 +29,12 @@ public class Collector : MonoBehaviour
     }
     private void OnCollisionEnter(Collision other)
     {
-        Brick brick = other.gameObject.GetComponent<Brick>();
-        if (brick)
-        {
-            InsMoneyAndGotoTop(other.transform.position);
-            Destroy(brick.gameObject);
-        }
+        // Brick brick = other.gameObject.GetComponent<Brick>();
+        // if (brick)
+        // {
+        //     InsMoneyAndGotoTop(other.transform.position);
+        //     Destroy(brick.gameObject);
+        // }
     }
     private void InsMoneyAndGotoTop(Vector3 pos)
     {

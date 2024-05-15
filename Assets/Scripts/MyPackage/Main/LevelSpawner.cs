@@ -50,9 +50,9 @@ namespace ZPackage
             {
                 Vector3 lastPos = cubePos.LastOrDefault();
                 GameObject dood = Instantiate(cube, lastPos, Quaternion.identity, transform);
-                GameObject deed = Instantiate(cube, lastPos + new Vector3(0, 60, 0), Quaternion.identity, transform);
+                GameObject deed = Instantiate(cube, lastPos + new Vector3(0, 40, 0), Quaternion.identity, transform);
                 dood.transform.GetChild(0).GetComponent<Renderer>().material = materials[i % materials.Count];
-                // deed.transform.GetChild(0).GetComponent<Renderer>().material = materials[i % materials.Count];
+                deed.transform.GetChild(0).GetComponent<Renderer>().material = materials[i % materials.Count];
                 cubePos.Add(lastPos + new Vector3(0, Random.Range(-2, 2), 3));
                 dood.gameObject.layer = 0;
             }
@@ -74,7 +74,7 @@ namespace ZPackage
             for (int i = 0; i < v; i++)
             {
                 Vector3 pos = GetPointByZ(lastBoxPos);
-                Instantiate(Boxes[Random.Range(0, Boxes.Count)], pos + new Vector3(0, Random.Range(5, 20), 0), Quaternion.identity, transform);
+                Instantiate(Boxes[Random.Range(0, Boxes.Count)], pos + new Vector3(0, Random.Range(1, 10), 0), Quaternion.identity, transform);
                 lastBoxPos += 30;
             }
         }

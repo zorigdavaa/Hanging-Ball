@@ -8,6 +8,7 @@ using Random = UnityEngine.Random;
 using UnityEngine.Pool;
 using ZPackage.Utility;
 using System.Linq;
+using Cinemachine;
 
 public class Player : Mb
 {
@@ -17,6 +18,7 @@ public class Player : Mb
     [SerializeField] int projectCount = 20;
     Vector3 FirePos => transform.position + transform.forward * 15;
     [SerializeField] ParticleSystem bigger, longer;
+    [SerializeField] List<CinemachineVirtualCamera> Cameras;
     Camera cam;
     Vector3 targetScale = Vector3.one;
     [SerializeField] SpringJoint joint;
@@ -117,8 +119,9 @@ public class Player : Mb
     }
     IEnumerator localCoroutine()
     {
-        yield return new WaitUntil(() => rb.velocity.magnitude < 2);
-        Z.GM.LevelComplete(this, 0);
+        yield return new WaitUntil(() => rb.velocity.magnitude < 0.5f);
+        // Z.GM.LevelComplete(this, 0);
+        Z.GM.BuildState();
     }
 
     internal void Longer()
@@ -134,5 +137,21 @@ public class Player : Mb
         // bigger.transform.localScale = targetScale;
         bigger.Play();
         // Bombog.transform.localScale = Bombog.transform.localScale * 1.2f;
+    }
+    public int OldCameraIndex;
+    public int currentCameraIndex;
+    CinemachineVirtualCamera currentCamera;
+    public void ChangeCamera(int index)
+    {
+        OldCameraIndex = currentCameraIndex;
+        // if (currentCameraIndex != index && Driver && CanChangeCamera)
+        if (currentCameraIndex != index)
+        {
+            currentCamera.Priority = 0;
+            currentCamera = Cameras[index];
+            currentCamera.Priority = 1;
+            currentCameraIndex = index;
+
+        }
     }
 }

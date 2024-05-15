@@ -12,7 +12,7 @@ using SupersonicWisdomSDK;
 
 namespace ZPackage
 {
-    public enum GameState { Starting, Playing, Pause, LevelCompleted, GameOver, Settings, Wait }
+    public enum GameState { Starting, Playing, Pause, LevelCompleted, GameOver, Settings, Wait, Build }
     public class GameManager : GenericSingleton<GameManager>
     {
         // [SerializeField] GroundSpawner groundSpawner;
@@ -27,6 +27,7 @@ namespace ZPackage
         public event EventHandler GameOverEvent;
         public event EventHandler Settings;
         public event EventHandler Waiting;
+        public event EventHandler Building;
         #endregion
         #region Properties
         private GameState _state;
@@ -210,6 +211,14 @@ namespace ZPackage
                 GALevelCompleteEvent();
             }
         }
+        internal void BuildState()
+        {
+            if (State != GameState.Build)
+            {
+                Building?.Invoke(this, EventArgs.Empty);
+                State = GameState.Build;
+            }
+        }
         public void GameOver(object sender, EventArgs e)
         {
             GameOverEvent?.Invoke(sender, e);
@@ -273,6 +282,8 @@ namespace ZPackage
             SupersonicWisdom.Api.NotifyLevelCompleted(GameController.Level, null);
 #endif
         }
+
+
         #endregion
 
     }

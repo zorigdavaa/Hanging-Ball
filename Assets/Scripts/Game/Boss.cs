@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class Boss : MonoBehaviour
 {
-    List<GameObject> Parts;
+    public List<GameObject> Parts;
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

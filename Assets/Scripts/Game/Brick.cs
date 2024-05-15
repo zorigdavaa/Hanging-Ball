@@ -88,10 +88,11 @@ public class Brick : MonoBehaviour
         IEnumerator localCoroutine()
         {
             float time = 0;
-            float duration = 1;
+            float duration = 0.8f;
             float t;
             // yield return new WaitForSeconds(Random.Range(3f, 5f));
-            yield return new WaitUntil(() => transform.position.z < Z.Player.transform.position.z - 10);
+            float startTime = Time.time;
+            yield return new WaitUntil(() => transform.position.z < Z.Player.transform.position.z - 5.5f || Time.time - startTime > 4);
             rb.isKinematic = true;
             coll.enabled = false;
             while (time < duration)
@@ -100,7 +101,8 @@ public class Brick : MonoBehaviour
                 t = time / duration;
                 Vector3 toPoint = cam.ScreenToWorldPoint(Z.CanM.Brick.transform.position + new Vector3(0, 0, 8f));
                 transform.position = Vector3.Lerp(transform.position, toPoint, t);
-                transform.localScale = Vector3.Lerp(transform.localScale, Vector3.one * 0.6f, t);
+                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.identity, t);
+                transform.localScale = Vector3.Lerp(transform.localScale, Vector3.one * 0.3f, t);
                 // Mathf.Lerp(0, 1, t);
                 yield return null;
             }

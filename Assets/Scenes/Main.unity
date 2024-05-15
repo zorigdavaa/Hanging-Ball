@@ -159,7 +159,7 @@ Camera:
   m_GameObject: {fileID: 169553323}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 2
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -183,7 +183,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60.000004
+  field of view: 60
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -279,7 +279,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
+  m_Intensity: 1.7
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -324,7 +324,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 3e-45, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 1.02e-43, y: 6e-44, z: 8.3314e-41, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -479,7 +479,7 @@ PrefabInstance:
     - target: {fileID: 6256958412827457951, guid: 6e8576fdc55e3034cabec6b0d97b1606, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 7675826601332790545, guid: 34fff68db04d64148a5f759905caa3ed, type: 3}
+      objectReference: {fileID: 21300000, guid: b1ce6c82dafd0ae45954a13b6929ade1, type: 3}
     - target: {fileID: 6337005739825099877, guid: 6e8576fdc55e3034cabec6b0d97b1606, type: 3}
       propertyPath: m_text
       value: Block
@@ -1942,7 +1942,7 @@ SpringJoint:
   m_ConnectedBody: {fileID: 0}
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0, z: 0}
-  m_AutoConfigureConnectedAnchor: 1
+  m_AutoConfigureConnectedAnchor: 0
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   serializedVersion: 2
   m_Spring: 10
@@ -2589,19 +2589,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5230682107247088937, guid: 34b37a34b393b7d4f892a2195fe382b4, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5230682107247088937, guid: 34b37a34b393b7d4f892a2195fe382b4, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5230682107247088937, guid: 34b37a34b393b7d4f892a2195fe382b4, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 938
+      value: -70
       objectReference: {fileID: 0}
     - target: {fileID: 5859635848857801600, guid: 34b37a34b393b7d4f892a2195fe382b4, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 5859635848857801600, guid: 34b37a34b393b7d4f892a2195fe382b4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5859635848857801604, guid: 34b37a34b393b7d4f892a2195fe382b4, type: 3}
       propertyPath: m_Pivot.x
@@ -3442,7 +3446,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 626839510}
   m_Follow: {fileID: 626839510}
   m_Lens:
-    FieldOfView: 60.000004
+    FieldOfView: 60
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000

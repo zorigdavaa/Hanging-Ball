@@ -92,7 +92,7 @@ public class Brick : MonoBehaviour
             float t;
             // yield return new WaitForSeconds(Random.Range(3f, 5f));
             float startTime = Time.time;
-            yield return new WaitUntil(() => transform.position.z < Z.Player.transform.position.z - 5.5f || Time.time - startTime > 4);
+            yield return new WaitUntil(() => transform.position.z < Z.Ball.transform.position.z - 5.5f || Time.time - startTime > 4);
             rb.isKinematic = true;
             coll.enabled = false;
             while (time < duration)

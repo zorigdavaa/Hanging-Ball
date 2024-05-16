@@ -26,6 +26,7 @@ namespace ZPackage
 
         ///<summary>Тохиргоо хийж байгааг шалгана</summary>
         public static bool IsSettings => GameManager.Instance.State == GameState.Settings;
+        public static bool IsBuilding => GameManager.Instance.State == GameState.Build;
 
         ///<summary>Input.GetMouseButton(0)</summary>
         public static bool IsClick => Input.GetMouseButton(0);

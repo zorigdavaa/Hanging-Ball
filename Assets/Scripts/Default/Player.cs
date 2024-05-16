@@ -12,135 +12,61 @@ using Cinemachine;
 
 public class Player : Mb
 {
-    [SerializeField] Rigidbody OlsEhlel;
-    [SerializeField] Transform Bombog, projectile;
-    [SerializeField] LineRenderer Ols;
-    [SerializeField] int projectCount = 20;
-    Vector3 FirePos => transform.position + transform.forward * 15;
-    [SerializeField] ParticleSystem bigger, longer;
     [SerializeField] List<CinemachineVirtualCamera> Cameras;
-    Camera cam;
-    Vector3 targetScale = Vector3.one;
-    [SerializeField] SpringJoint joint;
-    bool isHanging = false;
-    LayerMask HanaLayer;
-
+    [SerializeField] GameObject BoxPrefab;
+    BuildObj BuildObj;
     // Start is called before the first frame update
     void Start()
     {
-        cam = FindObjectOfType<Camera>();
-        Z.GM.GamePlay += OnGamePlay;
-        HanaLayer = LayerMask.GetMask("Hana");
-        joint = GetComponent<SpringJoint>();
+        Z.Player = this;
+        currentCamera = Cameras[0];
+        BuildObj = FindObjectOfType<BuildObj>();
     }
-
-    private void OnGamePlay(object sender, EventArgs e)
-    {
-        rb.isKinematic = false;
-        rb.AddForce(new Vector3(0, 0.5f, 0.5f) * 5, ForceMode.VelocityChange);
-    }
-
-    private void DrawRope()
-    {
-        if (isHanging)
-        {
-            Ols.SetPosition(0, OlsEhlel.position);
-            Ols.SetPosition(1, Bombog.position);
-        }
-        else
-        {
-            Ols.SetPositions(new Vector3[] { Vector3.zero, Vector3.zero });
-        }
-    }
-
-    // Update is called once per frame
+    float timer = 0;
+    float FireTime = 0.1f;
     void Update()
     {
-        DrawRope();
-        if (IsPlaying)
+        if (IsBuilding && IsClick)
+        // if (IsClick)
         {
-            if (IsDown)
+            timer += Time.deltaTime;
+            if (timer > FireTime)
             {
-                HangBall();
-
-            }
-            else
-            if (IsClick)
-            {
-                if (OlsEhlel.position.z > transform.position.z)
+                Z.GM.BrickCount--;
+                timer = 0;
+                GameObject box = Instantiate(BoxPrefab, currentCamera.transform.position, Quaternion.identity);
+                if (Z.GM.BrickCount == 0)
                 {
-                    rb.AddForce(new Vector3(0, 0, 1).normalized * 5, ForceMode.Acceleration);
+                    Z.GM.LevelComplete(this, 0);
                 }
-
+                StartCoroutine(MoveToCor(box.transform, BuildObj.Getlast(), () =>
+                {
+                    BuildObj.ShowLast();
+                    Destroy(box);
+                }));
             }
-            else if (IsUp)
-            {
-                ReleaseBall();
-            }
-            Bombog.transform.localScale = Vector3.Lerp(Bombog.transform.localScale, targetScale, 0.3f);
         }
     }
-
-    private void HangBall()
+    IEnumerator MoveToCor(Transform obj, Transform target, Action AfterAction = null)
     {
-        // if (Physics.Raycast(transform.position, new Vector3(0, 0.5f, 0.4f), out RaycastHit hit, 20, HanaLayer))
-        // {
+        float startTime = Time.time;
+        Vector3 startPos = obj.position;
+        Vector3 targetPos = target.position;
+        float duration = 1;
 
-        // }
-        // Debug.DrawRay(transform.position, new Vector3(0, 0.5f, 0.4f) * 5, Color.red, 2);
-        // OlsEhlel.transform.position = hit.point;
-        Vector3 OlsPostoin = transform.position + new Vector3(0, 0.6f, 1).normalized * 10;
-        OlsEhlel.transform.position = OlsPostoin;
-        // joint = gameObject.AddComponent<SpringJoint>();
-        joint.connectedBody = OlsEhlel;
-        joint.autoConfigureConnectedAnchor = false;
-        joint.spring = 400f;
-        joint.damper = 200f;
-        isHanging = true;
-    }
-
-    private void ReleaseBall()
-    {
-        joint.connectedBody = null;
-        joint.spring = 0;
-        joint.damper = 0;
-        isHanging = false;
-        rb.AddForce(new Vector3(0, 0.5f, 0.5f) * 100, ForceMode.Force);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Finish"))
+        while (Time.time - startTime < duration)
         {
-            Z.GM.Wait();
-            ReleaseBall();
-            StartCoroutine(localCoroutine());
+            float progress = (Time.time - startTime) / duration;
+            obj.position = Vector3.Lerp(startPos, targetPos, progress);
+            yield return null;
         }
-    }
-    IEnumerator localCoroutine()
-    {
-        yield return new WaitUntil(() => rb.velocity.magnitude < 0.5f);
-        // Z.GM.LevelComplete(this, 0);
-        Z.GM.BuildState();
+        obj.position = targetPos;
+        AfterAction?.Invoke();
     }
 
-    internal void Longer()
-    {
-        // longer.transform.localScale = targetScale;
-        longer.Play();
-    }
-
-    internal void Bigger()
-    {
-        print("Bigger");
-        targetScale = targetScale * 1.2f;
-        // bigger.transform.localScale = targetScale;
-        bigger.Play();
-        // Bombog.transform.localScale = Bombog.transform.localScale * 1.2f;
-    }
     public int OldCameraIndex;
     public int currentCameraIndex;
-    CinemachineVirtualCamera currentCamera;
+    [SerializeField] CinemachineVirtualCamera currentCamera;
     public void ChangeCamera(int index)
     {
         OldCameraIndex = currentCameraIndex;

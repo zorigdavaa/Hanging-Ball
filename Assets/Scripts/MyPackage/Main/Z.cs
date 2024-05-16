@@ -21,8 +21,27 @@ namespace ZPackage
                 }
                 return _player;
             }
+            set
+            {
+                _player = value;
+            }
         }
-
+        private static DemolishBall _ball;
+        public static DemolishBall Ball
+        {
+            get
+            {
+                if (_ball == null)
+                {
+                    _ball = Mb.FindObjectOfType<DemolishBall>();
+                }
+                return _ball;
+            }
+            set
+            {
+                _ball = value;
+            }
+        }
     }
 }
 

@@ -67,9 +67,9 @@ public class Brick : MonoBehaviour
 
     public void SetFRee()
     {
-        if (!isFree)
+        if (!isFree && !rb.isKinematic)
         {
-            rb.isKinematic = false;
+            // rb.isKinematic = false;
             rb.useGravity = true;
             rb.drag = 0;
             rb.angularDrag = 0.05f;

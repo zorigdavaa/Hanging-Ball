@@ -303,7 +303,7 @@ MonoBehaviour:
   m_BlendUpdateMethod: 1
   m_DefaultBlend:
     m_Style: 1
-    m_Time: 2
+    m_Time: 1
     m_CustomCurve:
       serializedVersion: 2
       m_Curve: []
@@ -3630,6 +3630,8 @@ MonoBehaviour:
   - {fileID: 8271969496468949885, guid: ed61a165d78c6094698fa446c17277bf, type: 3}
   - {fileID: 8271969496468949885, guid: f5f76eacd5ff9d04db8943076f753ed9, type: 3}
   - {fileID: 8271969496468949885, guid: 55e6fd9460e508d40bc6156d62fe7a4e, type: 3}
+  - {fileID: 8271969496468949885, guid: 67f244b7d62fd7643a030c82b31cf779, type: 3}
+  - {fileID: 8271969496468949885, guid: de173ce88160e2c4cb63082b36fc5367, type: 3}
   materials:
   - {fileID: 2100000, guid: 8ad719f83e4b141dd9a88f617831333f, type: 2}
   - {fileID: 2100000, guid: 3c696f428ea368145bf3fb88d01c38a1, type: 2}
@@ -3910,7 +3912,7 @@ MonoBehaviour:
   m_FollowOffset: {x: 10, y: 7.5, z: -10}
   m_XDamping: 1
   m_YDamping: 1
-  m_ZDamping: 1
+  m_ZDamping: 0.2
   m_AngularDampingMode: 0
   m_PitchDamping: 0
   m_YawDamping: 0

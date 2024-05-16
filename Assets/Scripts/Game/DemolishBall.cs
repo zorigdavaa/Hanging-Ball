@@ -106,21 +106,25 @@ public class DemolishBall : Mb
     float impactRadius => transform.localScale.z + transform.localScale.z * 0.1f;
     private void OnCollisionEnter(Collision other)
     {
-        Debug.DrawLine(transform.position, transform.position + -other.GetContact(0).normal * impactRadius, Color.cyan, 10);
-        RaycastHit[] bricks = Physics.SphereCastAll(transform.position, impactRadius, -other.GetContact(0).normal, impactRadius, brickLayer);
-        foreach (var item in bricks)
+        if (other.gameObject.GetComponent<Brick>() && !other.rigidbody.isKinematic)
         {
-            // item.GetComponent<Rigidbody>().isKinematic = false;
-            if (item.rigidbody)
+            Debug.DrawLine(transform.position, transform.position + -other.GetContact(0).normal * impactRadius, Color.cyan, 10);
+            RaycastHit[] bricks = Physics.SphereCastAll(transform.position, impactRadius, -other.GetContact(0).normal, impactRadius, brickLayer);
+            foreach (var item in bricks)
             {
-                item.rigidbody.AddExplosionForce(expForce, transform.position, impactRadius);
-                Brick brick = item.rigidbody.GetComponent<Brick>();
-                if (brick)
+                // item.GetComponent<Rigidbody>().isKinematic = false;
+                if (item.rigidbody)
                 {
-                    brick.SetFRee();
+                    item.rigidbody.AddExplosionForce(expForce, transform.position, impactRadius);
+                    Brick brick = item.rigidbody.GetComponent<Brick>();
+                    if (brick)
+                    {
+                        brick.SetFRee();
+                    }
                 }
             }
         }
+
     }
 
     private void OnTriggerEnter(Collider other)

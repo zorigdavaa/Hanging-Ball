@@ -40,12 +40,32 @@ public class BuildObj : MonoBehaviour
     public void ShowLast()
     {
         Parts[currentPartIndex].gameObject.SetActive(true);
+        // IncreaseIndex();
+    }
+
+    public void ShowLast(int Index)
+    {
+        Parts[Index].gameObject.SetActive(true);
+        // IncreaseIndex();
+    }
+    public void IncreaseIndex()
+    {
         currentPartIndex++;
     }
+    public int GetIndex()
+    {
+        return currentPartIndex;
+    }
+
     public Transform Getlast()
     {
-        return Parts[currentPartIndex];
+        if (currentPartIndex < Parts.Count)
+        {
+            return Parts[currentPartIndex];
+        }
+        return null;
     }
+
     [ContextMenu("Order By Y")]
     public void OrderPartsByY()
     {

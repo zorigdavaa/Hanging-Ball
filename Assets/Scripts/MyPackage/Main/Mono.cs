@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace ZPackage
 {
-    public class Mb: MonoBehaviour
+    public class Mb : MonoBehaviour
     {
         ///<summary>Эхлэж байгааг шалгана</summary>
         public static bool IsStarting => GameManager.Instance.State == GameState.Starting;
@@ -27,6 +27,7 @@ namespace ZPackage
         ///<summary>Тохиргоо хийж байгааг шалгана</summary>
         public static bool IsSettings => GameManager.Instance.State == GameState.Settings;
         public static bool IsBuilding => GameManager.Instance.State == GameState.Build;
+        public static bool IsWaiting => GameManager.Instance.State == GameState.Wait;
 
         ///<summary>Input.GetMouseButton(0)</summary>
         public static bool IsClick => Input.GetMouseButton(0);

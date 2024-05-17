@@ -10,8 +10,9 @@ namespace ZPackage
     public class LevelSpawner : GenericSingleton<LevelSpawner>
     {
         public List<Level> levels;
-        [SerializeField] GameObject Finish;
-        public List<lvlSegment> Segments;
+        [SerializeField] lvlSegment Finish;
+        public List<lvlSegment> AllSegments;
+        public Level CurrentLevel;
         private void Awake()
         {
             Z.GM.GameStart += OnGameStart;
@@ -30,27 +31,36 @@ namespace ZPackage
         }
         public void LoadLevel()
         {
-            // InstantiateRoad(200);
-            // InstantiateBoxes(20);
-            // InstantiateFinish();
-            for (int i = 0; i < 10; i++)
+            Random.InitState(Z.GM.Level);
+            if (CurrentLevel == null)
+            {
+                CurrentLevel = new GameObject("level " + Z.GM.Level).AddComponent<Level>();
+                CurrentLevel.transform.parent = transform;
+            }
+            for (int i = 0; i < 50; i++)
             {
                 SpawnSegment();
             }
+            InstantiateFinish();
         }
 
         private void InstantiateFinish()
         {
-            Instantiate(Finish, lastPos, Quaternion.identity, transform);
+            SpawnSegment(Finish);
         }
         Vector3 lastPos;
-        List<lvlSegment> CurrentSegments = new List<lvlSegment>();
-        void SpawnSegment()
+
+        lvlSegment SpawnSegment()
         {
-            lvlSegment newSegment = Segments[Random.Range(0, Segments.Count)];
-            lvlSegment inSegment = Instantiate(newSegment, lastPos, Quaternion.identity, transform);
-            CurrentSegments.Add(newSegment);
-            lastPos = inSegment.End.position + Vector3.up * Random.Range(-2, 2);
+            lvlSegment newSegment = AllSegments[Random.Range(0, AllSegments.Count)];
+            return SpawnSegment(newSegment);
+        }
+        lvlSegment SpawnSegment(lvlSegment segment)
+        {
+            lvlSegment inSegment = Instantiate(segment, lastPos, Quaternion.identity, CurrentLevel.transform);
+            CurrentLevel.LevelSegments.Add(segment);
+            lastPos = inSegment.End.position + Vector3.down * Random.Range(0, 2);
+            return inSegment;
         }
     }
 }

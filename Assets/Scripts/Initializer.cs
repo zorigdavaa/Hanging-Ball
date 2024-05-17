@@ -54,3 +54,11 @@ public class Initializer : MonoBehaviour
 #endif
 
 }
+//Obstacles
+//Moving Obstacle hiih, Tomor brick
+
+//Upgrade
+//Bigger collectAble hiih, SHield hiih
+
+//Environmen
+// Us hiih, Salhi hiih, Soronz hiih, 

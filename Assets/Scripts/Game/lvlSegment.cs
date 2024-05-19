@@ -13,5 +13,5 @@ public class lvlSegment : MonoBehaviour
 }
 public enum SegType
 {
-    None, Obs, Finish
+    None, Brick, Finish, Obs
 }

@@ -12,7 +12,10 @@ namespace ZPackage
         public List<Level> levels;
         [SerializeField] lvlSegment Finish;
         public List<lvlSegment> AllSegments;
+        public List<lvlSegment> ObsSegment;
+        public List<lvlSegment> NoneSegment;
         public Level CurrentLevel;
+        public int SegmentLength = 60;
         private void Awake()
         {
             Z.GM.GameStart += OnGameStart;
@@ -37,7 +40,7 @@ namespace ZPackage
                 CurrentLevel = new GameObject("level " + Z.GM.Level).AddComponent<Level>();
                 CurrentLevel.transform.parent = transform;
             }
-            for (int i = 0; i < 50; i++)
+            for (int i = 0; i < SegmentLength; i++)
             {
                 SpawnSegment();
             }

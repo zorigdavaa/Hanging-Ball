@@ -3639,7 +3639,10 @@ MonoBehaviour:
   - {fileID: 6026394841344532585, guid: 46784d810fa4ace4ca4520cf73652972, type: 3}
   - {fileID: 6026394841344532585, guid: cd7dceeed34762a468770c80705bce8c, type: 3}
   - {fileID: 6026394841344532585, guid: b78592d61b8099e4f9a70052677e4ef0, type: 3}
+  ObsSegment: []
+  NoneSegment: []
   CurrentLevel: {fileID: 0}
+  SegmentLength: 60
 --- !u!1 &1880806509
 GameObject:
   m_ObjectHideFlags: 0

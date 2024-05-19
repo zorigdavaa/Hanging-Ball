@@ -94,7 +94,7 @@ public class DemolishBall : Mb
         isHanging = true;
     }
 
-    private void ReleaseBall()
+    public void ReleaseBall()
     {
         joint.connectedBody = null;
         joint.spring = 0;

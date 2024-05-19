@@ -81,12 +81,13 @@ public class Cannon : Mb
     }
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("DD");
-        if (other.attachedRigidbody && other.attachedRigidbody.GetComponent<DemolishBall>())
+        DemolishBall ball = other.attachedRigidbody?.GetComponent<DemolishBall>();
+        if (ball)
         {
             sum = other.attachedRigidbody;
             sum.velocity = Vector3.zero;
             sum.gameObject.SetActive(false);
+            ball.ReleaseBall();
             GetComponent<SphereCollider>().enabled = false;
         }
     }

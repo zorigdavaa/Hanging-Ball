@@ -14,13 +14,16 @@ public class Boxes : MonoBehaviour
     {
         if (other.transform.root.CompareTag("Player"))
         {
-            foreach (var item in bricks)
+            if (other.attachedRigidbody.velocity.magnitude > 10)
             {
-                item.SetFRee();
+                foreach (var item in bricks)
+                {
+                    item.SetFRee();
+                }
+                Destroy(this);
             }
-            Destroy(this);
+
         }
     }
 
 }
-    

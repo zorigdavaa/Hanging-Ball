@@ -62,18 +62,32 @@ public class Cannon : Mb
         {
             sum.gameObject.SetActive(true);
             sum.transform.position = InsPos.position;
-            Vector3 velocity = Statics.CalculateVelocity(FirePos, InsPos.position, 1);
+            // Vector3 velocity = Statics.CalculateVelocity(FirePos, InsPos.position, 1);
+            sum.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            Vector3 velocity = InsPos.forward * 25;
             sum.GetComponent<Rigidbody>().AddForce(velocity, ForceMode.VelocityChange);
             sum = null;
+            EnableCollider();
         }
-
+    }
+    void EnableCollider()
+    {
+        StartCoroutine(LocalCor());
+        IEnumerator LocalCor()
+        {
+            yield return new WaitForSeconds(1);
+            GetComponent<SphereCollider>().enabled = true;
+        }
     }
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("DD");
         if (other.attachedRigidbody && other.attachedRigidbody.GetComponent<DemolishBall>())
         {
             sum = other.attachedRigidbody;
+            sum.velocity = Vector3.zero;
             sum.gameObject.SetActive(false);
+            GetComponent<SphereCollider>().enabled = false;
         }
     }
 

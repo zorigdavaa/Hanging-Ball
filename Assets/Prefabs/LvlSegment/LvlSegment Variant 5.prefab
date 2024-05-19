@@ -86,6 +86,14 @@ PrefabInstance:
       propertyPath: Type
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1974544243691460149, guid: dc72851fb65e12e4295f5b7bdc5ffca7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5540908809706788459, guid: dc72851fb65e12e4295f5b7bdc5ffca7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6334828280017454777, guid: dc72851fb65e12e4295f5b7bdc5ffca7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -126,9 +134,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6644112277904310416, guid: dc72851fb65e12e4295f5b7bdc5ffca7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7129871566404573698, guid: dc72851fb65e12e4295f5b7bdc5ffca7, type: 3}
       propertyPath: m_Name
       value: LvlSegment Variant 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576067057664331283, guid: dc72851fb65e12e4295f5b7bdc5ffca7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

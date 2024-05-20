@@ -81,6 +81,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 157ceca207acb6e43a33c3d2ffe6e905, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mat1: {fileID: 2100000, guid: 3c696f428ea368145bf3fb88d01c38a1, type: 2}
+  mat2: {fileID: 2100000, guid: 8ad719f83e4b141dd9a88f617831333f, type: 2}
   Type: 0
   Deed: {fileID: 223612867395026551}
   Dood: {fileID: 223612867395026551}

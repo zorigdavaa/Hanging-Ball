@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class lvlSegment : MonoBehaviour
 {
+    [SerializeField] Material mat1;
+    [SerializeField] Material mat2;
     public SegType Type;
     [SerializeField] GameObject Deed;
     [SerializeField] GameObject Dood;

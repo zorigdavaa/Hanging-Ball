@@ -100,6 +100,7 @@ MonoBehaviour:
   moveObj: {fileID: 2171439446091035992}
   Pos1: {x: 0, y: 3, z: 0}
   Pos2: {x: 0, y: -3, z: 0}
+  speed: 0.5
 --- !u!1 &6200864268273329100
 GameObject:
   m_ObjectHideFlags: 0

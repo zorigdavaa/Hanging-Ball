@@ -8,6 +8,7 @@ public class UpDownMove : MonoBehaviour
     [SerializeField] Vector3 Pos1;
     [SerializeField] Vector3 Pos2;
     [SerializeField] float speed = 1;
+    [SerializeField] Vector3 Rotation;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,5 +21,6 @@ public class UpDownMove : MonoBehaviour
     {
         t = Mathf.PingPong(Time.time * speed, 1);
         moveObj.position = Vector3.Lerp(Pos1, Pos2, t);
+        moveObj.Rotate(Rotation);
     }
 }

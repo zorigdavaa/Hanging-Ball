@@ -11,7 +11,10 @@ public class lvlSegment : MonoBehaviour
     [SerializeField] GameObject Dood;
     public Transform Start1;
     public Transform End;
-
+    private void OnValidate()
+    {
+        
+    }
 }
 public enum SegType
 {

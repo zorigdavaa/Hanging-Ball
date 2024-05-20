@@ -106,7 +106,7 @@ public class DemolishBall : Mb
     float impactRadius => transform.localScale.z + transform.localScale.z * 0.1f;
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.GetComponent<Brick>() && !other.rigidbody.isKinematic)
+        if (other.gameObject.GetComponent<Brick>() && CanCrush(other.rigidbody))
         {
             Debug.DrawLine(transform.position, transform.position + -other.GetContact(0).normal * impactRadius, Color.cyan, 10);
             RaycastHit[] bricks = Physics.SphereCastAll(transform.position, impactRadius, -other.GetContact(0).normal, impactRadius, brickLayer);
@@ -117,14 +117,22 @@ public class DemolishBall : Mb
                 {
                     item.rigidbody.AddExplosionForce(expForce, transform.position, impactRadius);
                     Brick brick = item.rigidbody.GetComponent<Brick>();
-                    if (brick)
+                    if (brick && CanCrush(brick.rb))
                     {
+                        // brick.rb.isKinematic = false;
                         brick.SetFRee();
                     }
                 }
             }
         }
-
+    }
+    bool CanCrush(Rigidbody other)
+    {
+        if (!other.isKinematic || IsShielded)
+        {
+            return true;
+        }
+        return false;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -157,5 +165,27 @@ public class DemolishBall : Mb
         // bigger.transform.localScale = targetScale;
         bigger.Play();
         // Bombog.transform.localScale = Bombog.transform.localScale * 1.2f;
+    }
+    [SerializeField] GameObject Shield;
+    [SerializeField]
+    private bool _shielded;
+    public bool IsShielded
+    {
+        get { return _shielded; }
+        internal set { _shielded = value; }
+    }
+
+    internal void Invincible(int v)
+    {
+        Shield.SetActive(true);
+        IsShielded = true;
+        rb.constraints = RigidbodyConstraints.FreezeRotation;
+        StartCoroutine(LocalCor());
+        IEnumerator LocalCor()
+        {
+            yield return new WaitForSeconds(v);
+            Shield.gameObject.SetActive(false);
+            rb.constraints = RigidbodyConstraints.None;
+        }
     }
 }

@@ -44,7 +44,7 @@ public class Player : Mb
 
                 timer = 0;
                 Vector3 pos = currentCamera.transform.position + currentCamera.transform.forward * 3 + -currentCamera.transform.up * 3;
-                for (int i = 0; i < 3; i++)
+                for (int i = 0; i < 5; i++)
                 {
                     if (Z.GM.BrickCount == 0)
                     {

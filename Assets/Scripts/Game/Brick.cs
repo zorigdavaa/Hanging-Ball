@@ -8,7 +8,7 @@ public class Brick : MonoBehaviour
     // public ChimneyCreator creator;
     [SerializeField] ParticleSystem particle;
     [SerializeField] Collider coll;
-    Rigidbody rb;
+    public Rigidbody rb;
     LayerMask brickLayer;
     bool isFree = false;
     Camera cam;
@@ -67,7 +67,7 @@ public class Brick : MonoBehaviour
 
     public void SetFRee()
     {
-        if (!isFree && !rb.isKinematic)
+        if (!isFree )
         {
             // rb.isKinematic = false;
             rb.useGravity = true;

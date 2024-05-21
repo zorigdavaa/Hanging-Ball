@@ -62,4 +62,14 @@ public class RotSpikes : MonoBehaviour
         mesh.triangles = triangles;
         mesh.RecalculateNormals();
     }
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("Player") && other.gameObject.GetComponent<DemolishBall>().IsShielded)
+        {
+            GetComponent<Rigidbody>().isKinematic = false;
+            Destroy(this);
+            Destroy(gameObject, 10);
+            GetComponent<MeshRenderer>().enabled = false;
+        }
+    }
 }

@@ -9,7 +9,7 @@ public class Brick : MonoBehaviour
     [SerializeField] ParticleSystem particle;
     [SerializeField] Collider coll;
     public Rigidbody rb;
-    LayerMask brickLayer;
+    // LayerMask brickLayer;
     bool isFree = false;
     Camera cam;
     // public bool debug = false;
@@ -18,16 +18,16 @@ public class Brick : MonoBehaviour
     {
         cam = Camera.main;
         rb = GetComponent<Rigidbody>();
-        brickLayer = LayerMask.GetMask("Brick");
+        // brickLayer = LayerMask.GetMask("Brick");
     }
-    private void OnCollisionEnter(Collision other)
-    {
-        if (other.gameObject.CompareTag("Player") && GetComponent<Rigidbody>().isKinematic)
-        {
-            SetFRee();
-        }
-    }
-    float timer = 10;
+    // private void OnCollisionEnter(Collision other)
+    // {
+    //     if (other.gameObject.CompareTag("Player") && GetComponent<Rigidbody>().isKinematic)
+    //     {
+    //         SetFRee();
+    //     }
+    // }
+    // float timer = 10;
     // private void LateUpdate()
     // {
     //     // timer -= Time.deltaTime;

@@ -23,4 +23,14 @@ public class UpDownMove : MonoBehaviour
         moveObj.position = Vector3.Lerp(Pos1, Pos2, t);
         moveObj.Rotate(Rotation);
     }
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("Player") && other.gameObject.GetComponent<DemolishBall>().IsShielded)
+        {
+            GetComponent<Rigidbody>().isKinematic = false;
+            Destroy(this);
+            Destroy(gameObject, 10);
+            GetComponent<MeshRenderer>().enabled = false;
+        }
+    }
 }

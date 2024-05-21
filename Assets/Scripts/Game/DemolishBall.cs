@@ -43,7 +43,6 @@ public class DemolishBall : Mb
             if (IsDown)
             {
                 HangBall();
-
             }
             else
             if (IsClick)
@@ -52,7 +51,6 @@ public class DemolishBall : Mb
                 {
                     rb.AddForce(new Vector3(0, 0, 1).normalized * 5, ForceMode.Acceleration);
                 }
-
             }
             else if (IsUp)
             {
@@ -106,6 +104,9 @@ public class DemolishBall : Mb
     float impactRadius => transform.localScale.z + transform.localScale.z * 0.1f;
     private void OnCollisionEnter(Collision other)
     {
+        // print(other.gameObject.name);
+        // print(other.gameObject.GetComponent<Brick>());
+        // print("Can crush " + CanCrush(other.rigidbody));
         if (other.gameObject.GetComponent<Brick>() && CanCrush(other.rigidbody))
         {
             Debug.DrawLine(transform.position, transform.position + -other.GetContact(0).normal * impactRadius, Color.cyan, 10);
@@ -119,7 +120,7 @@ public class DemolishBall : Mb
                     Brick brick = item.rigidbody.GetComponent<Brick>();
                     if (brick && CanCrush(brick.rb))
                     {
-                        // brick.rb.isKinematic = false;
+                        brick.rb.isKinematic = false;
                         brick.SetFRee();
                     }
                 }
@@ -143,6 +144,10 @@ public class DemolishBall : Mb
             ReleaseBall();
             StartCoroutine(WaitToStop());
         }
+        // else if (IsShielded && other.attachedRigidbody && other.attachedRigidbody.isKinematic)
+        // {
+        //     other.attachedRigidbody.isKinematic = false;
+        // }
     }
     IEnumerator WaitToStop()
     {
@@ -175,7 +180,7 @@ public class DemolishBall : Mb
         internal set { _shielded = value; }
     }
 
-    internal void Invincible(int v)
+    internal void Invincible(float v)
     {
         Shield.SetActive(true);
         IsShielded = true;
@@ -185,6 +190,7 @@ public class DemolishBall : Mb
         {
             yield return new WaitForSeconds(v);
             Shield.gameObject.SetActive(false);
+            IsShielded = false;
             rb.constraints = RigidbodyConstraints.None;
         }
     }

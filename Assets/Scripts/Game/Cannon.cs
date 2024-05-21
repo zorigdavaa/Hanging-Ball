@@ -11,6 +11,7 @@ public class Cannon : Mb
     [SerializeField] Transform Body;
     [SerializeField] LineRenderer projectile;
     [SerializeField] int projectCount = 20;
+    [SerializeField] GameObject BackFire;
     Vector3 FirePos => InsPos.position + transform.forward * 50;
     Rigidbody sum;
     // Start is called before the first frame update
@@ -23,7 +24,7 @@ public class Cannon : Mb
     void Update()
     {
         Rotate();
-        if (IsPlaying && sum)
+        if (IsPlaying && sum && FireAble)
         {
             if (IsUp)
             {
@@ -60,6 +61,7 @@ public class Cannon : Mb
     {
         if (sum)
         {
+            BackFire.gameObject.SetActive(false);
             sum.gameObject.SetActive(true);
             sum.transform.position = InsPos.position;
             // Vector3 velocity = Statics.CalculateVelocity(FirePos, InsPos.position, 1);
@@ -67,18 +69,23 @@ public class Cannon : Mb
             Vector3 velocity = InsPos.forward * 25;
             sum.GetComponent<Rigidbody>().AddForce(velocity, ForceMode.VelocityChange);
             sum = null;
-            EnableCollider();
+            WaitAndCall(() =>
+            {
+                GetComponent<SphereCollider>().enabled = true;
+
+            });
         }
     }
-    void EnableCollider()
+    void WaitAndCall(Action Action, float Wait = 1)
     {
         StartCoroutine(LocalCor());
         IEnumerator LocalCor()
         {
-            yield return new WaitForSeconds(1);
-            GetComponent<SphereCollider>().enabled = true;
+            yield return new WaitForSeconds(Wait);
+            Action();
         }
     }
+    bool FireAble = false;
     private void OnTriggerEnter(Collider other)
     {
         DemolishBall ball = other.attachedRigidbody?.GetComponent<DemolishBall>();
@@ -89,6 +96,11 @@ public class Cannon : Mb
             sum.gameObject.SetActive(false);
             ball.ReleaseBall();
             GetComponent<SphereCollider>().enabled = false;
+            WaitAndCall(() =>
+            {
+                FireAble = true;
+                BackFire.gameObject.SetActive(true);
+            });
         }
     }
 

@@ -192,6 +192,7 @@ public class DemolishBall : Mb
             Shield.gameObject.SetActive(false);
             IsShielded = false;
             rb.constraints = RigidbodyConstraints.None;
+            rb.constraints = RigidbodyConstraints.FreezePositionX;
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using System.Linq;
 
 namespace UnityUtilities.Examples
 {
@@ -16,10 +18,12 @@ namespace UnityUtilities.Examples
         void Awake()
         {
             // Get an array with each value of TetrisPiece
-            TetrisPiece[] tetrisPieceArray = (TetrisPiece[]) Enum.GetValues(typeof (TetrisPiece));
+            TetrisPiece[] tetrisPieceArray = (TetrisPiece[])Enum.GetValues(typeof(TetrisPiece));
 
             // Create the bag containing two instances of every value of TetrisPiece
             pieceBag = new RandomBag<TetrisPiece>(tetrisPieceArray, 2);
+            // pieceBag = new RandomBag<TetrisPiece>((bag) =>
+            // new List<TetrisPiece>(), 500);
 
             // Gets 50 items from the bag. The bag will be filled with 14 TetrisPieces and
             // automatically refilled with 14 more when needed. No two pieces will ever be

@@ -5,18 +5,18 @@ using UnityEngine;
 public class StarBooster : MonoBehaviour
 {
     bool Protect = false;
+    [SerializeField] float Duration = 10;
     // Start is called before the first frame update
     void Start()
     {
 
     }
 
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
         if (Protect)
         {
-            foreach (var item in Physics.OverlapSphere(transform.position, 3))
+            foreach (var item in Physics.OverlapSphere(transform.position, 2))
             {
                 if (item.attachedRigidbody != null)
                 {
@@ -24,7 +24,6 @@ public class StarBooster : MonoBehaviour
                 }
             }
         }
-
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -34,9 +33,9 @@ public class StarBooster : MonoBehaviour
             GameObject parent = transform.parent.gameObject;
             transform.SetParent(null);
             Destroy(parent);
-            ball.Invincible(5);
+            ball.Invincible(Duration);
             transform.SetParent(ball.transform);
-            Destroy(gameObject, 5);
+            Destroy(gameObject, Duration);
             foreach (Transform item in transform)
             {
                 item.gameObject.SetActive(false);

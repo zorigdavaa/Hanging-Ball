@@ -29,8 +29,7 @@ public class UpDownMove : MonoBehaviour
         {
             GetComponent<Rigidbody>().isKinematic = false;
             Destroy(this);
-            Destroy(gameObject, 10);
-            GetComponent<MeshRenderer>().enabled = false;
+
         }
     }
 }

@@ -17,6 +17,7 @@ namespace ZPackage
         public List<lvlSegment> ObsSegments;
         public List<lvlSegment> BrickSegments;
         public List<lvlSegment> BoosterSegments;
+        WeightedRandomBag<List<lvlSegment>> Bag;
         public Level CurrentLevel;
         public int SegmentLength = 60;
         private void Awake()
@@ -43,12 +44,14 @@ namespace ZPackage
                     default: break;
                 }
             }
-            InitData();
+            Bag = new WeightedRandomBag<List<lvlSegment>>();
+            Bag.Add(NoneSegments, 40);
+            Bag.Add(BrickSegments, 30);
+            Bag.Add(ObsSegments, 20);
+            Bag.Add(BoosterSegments, 10);
             LoadLevel();
             // LeaderBoardData.SetDatas();
         }
-
-
 
         public void LoadLevel()
         {
@@ -74,31 +77,7 @@ namespace ZPackage
         lvlSegment LastSpawnedSegment;
         lvlSegment SpawnSegment(SegType lastType)
         {
-            List<SegmentData> candidates = new List<SegmentData>();
-            float totalProbability = 0f;
-
-            foreach (var kvp in segmentDataDict)
-            {
-                // if (kvp.Key == lastType || kvp.Key == SegType.None)
-                // {
-                //     continue;
-                // }
-
-                candidates.Add(kvp.Value);
-                totalProbability += kvp.Value.probability;
-            }
-
-            float randomValue = Random.value * totalProbability;
-            foreach (var candidate in candidates)
-            {
-                if (randomValue < candidate.probability)
-                {
-                    return SpawnRandomSegment(candidate.segments);
-                }
-                randomValue -= candidate.probability;
-            }
-
-            return SpawnRandomSegment(segmentDataDict[SegType.Brick].segments); // Fallback
+            return SpawnRandomSegment(Bag.GetRandom());
         }
 
 
@@ -114,24 +93,5 @@ namespace ZPackage
             lastPos = inSegment.End.position + Vector3.down * Random.Range(0, 2);
             return inSegment;
         }
-        private Dictionary<SegType, SegmentData> segmentDataDict;
-        private void InitData()
-        {
-            segmentDataDict = new Dictionary<SegType, SegmentData>
-            {
-                { SegType.None, new SegmentData { segments = NoneSegments, probability = 0.35f } },
-                { SegType.Brick, new SegmentData { segments = BrickSegments, probability = 0.35f } },
-                { SegType.Obs, new SegmentData { segments = ObsSegments, probability = 0.2f } },
-                { SegType.Booster, new SegmentData { segments = BoosterSegments, probability = 0.1f } }
-            };
-        }
-
-
-    }
-    [System.Serializable]
-    public class SegmentData
-    {
-        public List<lvlSegment> segments;
-        public float probability;
     }
 }

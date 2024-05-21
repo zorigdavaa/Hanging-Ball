@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 966444065692758197}
     m_Modifications:
+    - target: {fileID: 2171439446091035992, guid: 46724547b81cdc24099e9eff4bc5dda6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3205045944747160427, guid: 46724547b81cdc24099e9eff4bc5dda6, type: 3}
       propertyPath: m_Name
       value: MovingObsj
@@ -120,7 +124,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7129871566404573698, guid: dc72851fb65e12e4295f5b7bdc5ffca7, type: 3}
       propertyPath: m_Name
-      value: LvlSegment Variant 6
+      value: Obs
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

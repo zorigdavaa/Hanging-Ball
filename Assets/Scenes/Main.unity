@@ -2008,6 +2008,7 @@ MonoBehaviour:
   longer: {fileID: 489124076}
   joint: {fileID: 626839515}
   Shield: {fileID: 1597631970}
+  _shielded: 0
 --- !u!145 &626839515
 SpringJoint:
   m_ObjectHideFlags: 0
@@ -3728,6 +3729,7 @@ MonoBehaviour:
   - {fileID: 6026394841344532585, guid: 46784d810fa4ace4ca4520cf73652972, type: 3}
   - {fileID: 6026394841344532585, guid: cd7dceeed34762a468770c80705bce8c, type: 3}
   - {fileID: 6026394841344532585, guid: b78592d61b8099e4f9a70052677e4ef0, type: 3}
+  - {fileID: 6026394841344532585, guid: e30fbd626272425489a44b47221a2f45, type: 3}
   - {fileID: 6026394841344532585, guid: d31a3e3ea9cd6a242bdcca0ca4ff1b7d, type: 3}
   - {fileID: 6026394841344532585, guid: 83bde43159125d04bbf59270ccb776ec, type: 3}
   NoneSegments: []

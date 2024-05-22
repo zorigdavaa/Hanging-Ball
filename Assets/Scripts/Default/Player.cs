@@ -57,8 +57,9 @@ public class Player : Mb
                     if (goindblock)
                     {
                         GameObject box = Instantiate(BoxPrefab, pos, Quaternion.identity);
-                        box.GetComponent<Brick>().SetColor(goindblock.GetComponent<Renderer>().material.color);
-                        StartCoroutine(MoveToCor(box.transform, goindblock, () =>
+                        Brick brick = box.GetComponent<Brick>();
+                        Color ToColor = goindblock.GetComponent<Renderer>().material.color;
+                        StartCoroutine(MoveToCor(brick, goindblock, ToColor, () =>
                         {
                             BuildObj.ShowLast(index);
                             Destroy(box);
@@ -75,20 +76,22 @@ public class Player : Mb
             }
         }
     }
-    IEnumerator MoveToCor(Transform obj, Transform target, Action AfterAction = null)
+    IEnumerator MoveToCor(Brick obj, Transform target, Color ToColor, Action AfterAction = null)
     {
         float startTime = Time.time;
-        Vector3 startPos = obj.position;
+        Vector3 startPos = obj.transform.position;
         Vector3 targetPos = target.position;
         float duration = 1;
-
+        // Color initColor = obj.GetColor();
         while (Time.time - startTime < duration)
         {
             float progress = (Time.time - startTime) / duration;
-            obj.position = Vector3.Lerp(startPos, targetPos, progress);
+            obj.transform.position = Vector3.Lerp(startPos, targetPos, progress);
+            Color transitColor = Color.Lerp(obj.GetColor(), ToColor, progress);
+            obj.SetColor(transitColor);
             yield return null;
         }
-        obj.position = targetPos;
+        obj.transform.position = targetPos;
         AfterAction?.Invoke();
     }
 

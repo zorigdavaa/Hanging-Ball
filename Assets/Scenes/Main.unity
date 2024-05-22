@@ -3799,6 +3799,8 @@ MonoBehaviour:
   - {fileID: 6026394841344532585, guid: e30fbd626272425489a44b47221a2f45, type: 3}
   - {fileID: 6026394841344532585, guid: d31a3e3ea9cd6a242bdcca0ca4ff1b7d, type: 3}
   - {fileID: 6026394841344532585, guid: 83bde43159125d04bbf59270ccb776ec, type: 3}
+  - {fileID: 2339583905357056390, guid: 3c23f4b49e061f249ae4ad2939524134, type: 3}
+  - {fileID: 2339583905357056390, guid: 4d7857d1a59127c45839061347349ba7, type: 3}
   NoneSegments: []
   ObsSegments: []
   BrickSegments: []

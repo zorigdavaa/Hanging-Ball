@@ -108,7 +108,8 @@ public class Brick : MonoBehaviour, IColored
                 yield return null;
             }
             Z.GM.BrickCount++;
-            Destroy(gameObject);
+            // Destroy(gameObject);
+            Z.Player.BricksPool.Release(gameObject);
         }
     }
 

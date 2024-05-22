@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using ZPackage;
 
-public class Brick : MonoBehaviour
+public class Brick : MonoBehaviour, IColored
 {
     // public ChimneyCreator creator;
     [SerializeField] ParticleSystem particle;
     [SerializeField] Collider coll;
+    [SerializeField] Renderer rend;
     public Rigidbody rb;
     // LayerMask brickLayer;
     bool isFree = false;
@@ -67,7 +68,7 @@ public class Brick : MonoBehaviour
 
     public void SetFRee()
     {
-        if (!isFree )
+        if (!isFree)
         {
             // rb.isKinematic = false;
             rb.useGravity = true;
@@ -109,5 +110,15 @@ public class Brick : MonoBehaviour
             Z.GM.BrickCount++;
             Destroy(gameObject);
         }
+    }
+
+    public Color GetColor()
+    {
+        return rend.material.color;
+    }
+
+    public void SetColor(Color color)
+    {
+        rend.material.color = color;
     }
 }

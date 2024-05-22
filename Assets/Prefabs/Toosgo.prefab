@@ -77,6 +77,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particle: {fileID: 7253214525869983458}
   coll: {fileID: 1292786819213636755}
+  rend: {fileID: 4145234931323680957}
+  rb: {fileID: 0}
 --- !u!1 &2536190781421953160
 GameObject:
   m_ObjectHideFlags: 0

@@ -57,6 +57,7 @@ public class Player : Mb
                     if (goindblock)
                     {
                         GameObject box = Instantiate(BoxPrefab, pos, Quaternion.identity);
+                        box.GetComponent<Brick>().SetColor(goindblock.GetComponent<Renderer>().material.color);
                         StartCoroutine(MoveToCor(box.transform, goindblock, () =>
                         {
                             BuildObj.ShowLast(index);
